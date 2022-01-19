@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        #main {
+
+            flex-wrap: wrap;
+            width: 170px;
+            position: absolute;
+            margin: auto;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+
+        div button {
+            width: 50px;
+            height: 30px;
+            margin-top: 7px;
+            background-color: blanchedalmond;
+
+
+        }
+
+        .hello {
+            margin-top: 50%;
+        }
+
+        .btn {
+
+            background-color: black;
+            margin-top: 10px;
+
+        }
+
+        #inmay {
+            width: 160px;
+            height: 30px;
+            border: 3px solid black;
+            font-weight: bolder;
+        }
+
+        #hhh {
+            margin-top: 40px;
+            color: turquoise;
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+        <h1 id="hhh">Calculater</h1>
+    </center>
+    <div id="main">
+        <div class="hello"><input type="text" id="inmay" placeholder="0"></div>
+        <div onclick="showval()" class="btn">
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+            <button>4</button>
+            <button>5</button>
+            <button>6</button>
+            <button>7</button>
+            <button>8</button>
+            <button>9</button>
+            <button>0</button>
+            <button>+</button>
+            <button>-</button>
+            <button>*</button>
+            <button>/</button>
+            <button>=</button>
+            <button>C</button>
+            <button>&lt;--</button>
+        </div>
+    </div>
+    <script>
+
+
+        let ops = "/*+-"
+        let calculationHogyi = false;
+        function showval() {
+
+            if (event.target.nodeName == "DIV") {
+                return;
+            }
+
+            else if (event.target.innerText == "=") {
+                inmay.value = eval(inmay.value || "0");
+                calculationHogyi = true;
+            }
+            else if (event.target.innerText == "C") {
+                inmay.value = "";
+            }
+            else if (event.target.innerText == "<--") {
+                inmay.value = inmay.value.slice(0, -1);
+
+            } 
+            else {
+                if (calculationHogyi) {
+                    if (ops.includes(event.target.innerText)) {
+
+                        inmay.value += event.target.innerText;
+                    } else {
+                        inmay.value = event.target.innerText;
+                    }
+                    calculationHogyi = false;
+                    return;
+                }
+            
+            let lastCharacter = inmay.value[inmay.value.length - 1];
+
+            if (lastCharacter == undefined && ops.includes(event.target.innerText)) {
+                return;
+            }
+
+            if (ops.includes(lastCharacter) && ops.includes(event.target.innerText)) {
+
+                inmay.value = inmay.value.slice(0, -1) + event.target.innerText;
+            }
+
+            else {
+                inmay.value += event.target.innerText;
+            }
+
+        }
+    }
+
+    </script>
+</body>
+
+</html>
